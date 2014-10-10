@@ -1,0 +1,14 @@
+<div class="col-md-3 sidebar">
+	<div ng-controller="PlaylistMenuController">
+		<h2>Playlists</h2>
+
+		<ul class="list-group">
+	  		<li class="list-group-item" ng-repeat="playlist in playlists">
+	          <span><a ui-sref="playlists.details({playlistUri:playlist.uri})">{{playlist.name}}</a></span>
+	        </li>
+    	</ul>
+	</div>					
+</div>
+<div class="col-md-9">
+	<div ui-view></div>
+</div>	

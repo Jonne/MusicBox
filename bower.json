@@ -1,0 +1,26 @@
+{
+  "name": "MusicBox",
+  "version": "0.0.0",
+  "authors": [
+    "Jonne Kats <jonnekats@gmail.com>"
+  ],
+  "main": "index.htm",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.10",
+    "angular": "~1.2.20",
+    "bootstrap": "~3.2.0",
+    "jquery": "~2.1.1",
+    "ngStorage": "~0.1.7",
+    "underscore": "~1.6.0",
+    "seiyria-bootstrap-slider": "~3.1.0"
+  }
+}

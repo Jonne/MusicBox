@@ -1,0 +1,92 @@
+<!doctype html>
+<html ng-app="musicbox">
+	<head>
+		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+		<script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+		<script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+		<script type="text/javascript" src="http://192.168.1.104/mopidy/mopidy.js"></script>
+
+		<script src="script/app.js"></script>
+		<script src="script/controllers/playlistmenucontroller.js"></script>
+		<script src="script/controllers/playlistcontroller.js"></script>
+		<script src="script/controllers/playercontroller.js"></script>
+		<script src="script/controllers/queuecontroller.js"></script>
+		<script src="script/controllers/navigationcontroller.js"></script>
+		<script src="script/controllers/searchcontroller.js"></script>
+		<script src="script/services/mopidyservice.js"></script>
+		<script src="script/directives/slider.js"></script>
+
+		<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+		<link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" rel="stylesheet">
+		
+		<link href="css/musicbox.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default" role="navigation" ng-controller="NavigationController">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">MusicBox</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li ui-sref-active="active" as-parent><a ui-sref="playlists">PlayLists</a></li>
+		        <li ui-sref-active="active"><a ui-sref="queue">Queue</a></li>
+		        <li ui-sref-active="active"><a ui-sref="readio">Radio</a></li>
+		      </ul>
+ 			  <form class="navbar-form navbar-left" role="search" ng-submit="search()">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search" ng-model="query">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>
+		      </form>		      
+		      <ul class="nav navbar-nav navbar-right">
+		        <li ui-sref-active="active"><a ui-sref="#">Settings</a></li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10">
+					<div ui-view></div>
+				</div>		
+				<div class="col-md-2">
+					<div ng-controller="PlayerController" class="player">
+						<h3>{{track.name}}</h3>
+						<h4>{{formatArtists(track.artists)}}</h4>
+						<div>
+							<input musicbox-slider="{ min: 0, max: 100, step: 1, selection: 'before', tooltip: 'hide' }" slider-value="currentTimePosition" on-slider-value-changing="onTimeChanging(sliderValue)" on-slider-value-changed="onTimeChanged(sliderValue)"/>
+						</div>
+						<div class="time-marker"> 
+							<span id="track-current">{{currentTime}}</span>
+							<span id="track-length">{{length}}</span>
+						</div>
+						<br/>
+						<ul class="list-inline">
+						  <li><a href="" class="btn-lg glyphicon glyphicon-fast-backward" role="button" ng-click="previous()"></a></li>
+						  <li><a href="" class="btn-lg glyphicon" ng-class="{ 'glyphicon-play': ! isPlaying, 'glyphicon-pause': isPlaying }" ng-click="play()" role="button"></a></li>
+						  <li><a href="" class="btn-lg glyphicon glyphicon-fast-forward" role="button" ng-click="next()"></a></li>
+						</ul>	
+
+						<div>
+							<input musicbox-slider="{ min: 0, max: 100, step: 1, selection: 'before', tooltip: 'hide' }" slider-value="volume" on-slider-value-changed="onVolumeChanged(sliderValue)"/>
+							<span class="glyphicon glyphicon-volume-up"></span>
+						</div>											
+					</div>
+				</div>							
+			</div>
+		</div>
+
+		<script src="script/lib/bootstrap.min.js"></script>
+	</body>
+
+
+</html>

@@ -1,0 +1,20 @@
+<div>
+	<h2>Queue</h2>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Song</th>
+				<th>Artist</th>
+				<th>Album</th>
+			</tr>	
+		</thead>
+		<tbody>
+			<tr ng-repeat="track in tracks">
+				<td>{{track.name}}</td>
+				<td>{{formatArtists(track.artists)}}</td>
+				<td>{{track.album.name}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
